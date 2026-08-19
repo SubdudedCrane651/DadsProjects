@@ -1,0 +1,327 @@
+
+    <html>
+    <head>
+        <title>Dad Project Gallery</title>
+        <style>
+            body {
+                font-family: Arial;
+                padding: 20px;
+                background: #f5f5f5;
+                color: #000;
+                transition: background 0.3s, color 0.3s;
+            }
+            body.dark {
+                background: #1e1e1e;
+                color: #e0e0e0;
+            }
+
+            header, footer {
+                text-align: center;
+                padding: 10px;
+                background: #222;
+                color: white;
+                transition: background 0.3s, color 0.3s;
+            }
+            body.dark header, body.dark footer {
+                background: #000;
+                color: #fff;
+            }
+
+            .toggle-btn {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 10px 15px;
+                background: #222;
+                color: white;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 14px;
+                transition: background 0.3s;
+            }
+            body.dark .toggle-btn {
+                background: #555;
+            }
+
+            .search-box { text-align: center; margin-bottom: 20px; }
+            .search-box input {
+                width: 300px;
+                padding: 8px;
+                font-size: 14px;
+                border-radius: 6px;
+                border: 1px solid #aaa;
+            }
+
+            .sort-box { text-align:center; margin-bottom:20px; }
+            .sort-box button {
+                padding: 8px 12px;
+                margin: 5px;
+                border-radius: 6px;
+                border: none;
+                background: #444;
+                color: white;
+                cursor: pointer;
+            }
+            body.dark .sort-box button {
+                background: #666;
+            }
+
+            .grid { display: flex; flex-wrap: wrap; gap: 20px; }
+
+            .project {
+                width: 220px;
+                background: white;
+                padding: 10px;
+                border-radius: 10px;
+                cursor: pointer;
+                position: relative;
+                transition: background 0.3s;
+            }
+            body.dark .project {
+                background: #2c2c2c;
+            }
+
+            .project img {
+                width: 100%;
+                height: 180px;
+                object-fit: cover;
+                border-radius: 8px;
+            }
+
+            .title {
+                text-align: center;
+                margin-top: 8px;
+                font-size: 14px;
+                font-weight: bold;
+            }
+        </style>
+
+        <script>
+            function toggleDarkMode() {
+                document.body.classList.toggle('dark');
+            }
+
+            function searchProjects() {
+                let q = document.getElementById('search').value.toLowerCase();
+                let items = document.getElementsByClassName('project');
+
+                for (let item of items) {
+                    let text = item.getAttribute('data-search');
+                    item.style.display = text.includes(q) ? 'block' : 'none';
+                }
+            }
+
+            function sortProjects(type) {
+                let grid = document.querySelector('.grid');
+                let items = Array.from(document.getElementsByClassName('project'));
+
+                items.sort((a, b) => {
+                    let A = a.getAttribute('data-sort-' + type);
+                    let B = b.getAttribute('data-sort-' + type);
+                    return A.localeCompare(B);
+                });
+
+                items.forEach(i => grid.appendChild(i));
+            }
+        </script>
+    </head>
+
+    <body>
+        <button class="toggle-btn" onclick="toggleDarkMode()">Dark Mode</button>
+
+        <header><h1>Dad Project Gallery</h1></header>
+
+        <div class="search-box">
+            <input id="search" type="text" placeholder="Search..."
+                   onkeyup="searchProjects()">
+        </div>
+
+        <div class="sort-box">
+            <button onclick="sortProjects('year')">Sort by Year</button>
+            <button onclick="sortProjects('occasion')">Sort by Occasion</button>
+        </div>
+
+        <div class="grid">
+    
+        <div class="project"
+             data-search="2026 marchiens "
+             data-sort-year="2026"
+             data-sort-occasion="Marchiens">
+
+            <img src="images\20260115_141318.jpg">
+
+            <div class="title">Marchiens (2026)</div>
+            <div class="title"></div>
+        </div>
+        
+        <div class="project"
+             data-search="2023 christmas "
+             data-sort-year="2023"
+             data-sort-occasion="Christmas">
+
+            <img src="images\Christmas Model 2023_1.jpg">
+
+            <div class="title">Christmas (2023)</div>
+            <div class="title"></div>
+        </div>
+        
+        <div class="project"
+             data-search="2024 christmas "
+             data-sort-year="2024"
+             data-sort-occasion="Christmas">
+
+            <img src="images\Christmas2024_1a.jpg">
+
+            <div class="title">Christmas (2024)</div>
+            <div class="title"></div>
+        </div>
+        
+        <div class="project"
+             data-search="2024 christmas "
+             data-sort-year="2024"
+             data-sort-occasion="Christmas">
+
+            <img src="images\Christmas2024_2a.jpg">
+
+            <div class="title">Christmas (2024)</div>
+            <div class="title"></div>
+        </div>
+        
+        <div class="project"
+             data-search="2025 easter "
+             data-sort-year="2025"
+             data-sort-occasion="Easter">
+
+            <img src="images\Easter 2025_1.jpg">
+
+            <div class="title">Easter (2025)</div>
+            <div class="title"></div>
+        </div>
+        
+        <div class="project"
+             data-search="2023 mother's day "
+             data-sort-year="2023"
+             data-sort-occasion="Mother's Day">
+
+            <img src="images\Mothers_Day 2023.jpg">
+
+            <div class="title">Mother's Day (2023)</div>
+            <div class="title"></div>
+        </div>
+        
+        <div class="project"
+             data-search="2024 holloween "
+             data-sort-year="2024"
+             data-sort-occasion="Holloween">
+
+            <img src="images\Holloween 2024_1.jpg">
+
+            <div class="title">Holloween (2024)</div>
+            <div class="title"></div>
+        </div>
+        
+        <div class="project"
+             data-search="2025 holloween "
+             data-sort-year="2025"
+             data-sort-occasion="Holloween">
+
+            <img src="images\Holloween_2025.jpg">
+
+            <div class="title">Holloween (2025)</div>
+            <div class="title"></div>
+        </div>
+        
+        <div class="project"
+             data-search="2023 father's day "
+             data-sort-year="2023"
+             data-sort-occasion="Father's Day">
+
+            <img src="images\Fathers_Day 2023_2.jpg">
+
+            <div class="title">Father's Day (2023)</div>
+            <div class="title"></div>
+        </div>
+        
+        <div class="project"
+             data-search="2024 christmas "
+             data-sort-year="2024"
+             data-sort-occasion="Christmas">
+
+            <img src="images\Christmas_For_The_Campers 2024_1.jpg">
+
+            <div class="title">Christmas (2024)</div>
+            <div class="title"></div>
+        </div>
+        
+        <div class="project"
+             data-search="2026 easter "
+             data-sort-year="2026"
+             data-sort-occasion="Easter">
+
+            <img src="images\Paques_2026.jpg">
+
+            <div class="title">Easter (2026)</div>
+            <div class="title"></div>
+        </div>
+        
+        <div class="project"
+             data-search="2025 recolte "
+             data-sort-year="2025"
+             data-sort-occasion="Recolte">
+
+            <img src="images\Recolte 2025.jpg">
+
+            <div class="title">Recolte (2025)</div>
+            <div class="title"></div>
+        </div>
+        
+        <div class="project"
+             data-search="2024 valentine's day "
+             data-sort-year="2024"
+             data-sort-occasion="Valentine's Day">
+
+            <img src="images\St-Valentines 2024_1.jpg">
+
+            <div class="title">Valentine's Day (2024)</div>
+            <div class="title"></div>
+        </div>
+        
+        <div class="project"
+             data-search="2025 valentine's day "
+             data-sort-year="2025"
+             data-sort-occasion="Valentine's Day">
+
+            <img src="images\St-Valentines 2025_1.jpg">
+
+            <div class="title">Valentine's Day (2025)</div>
+            <div class="title"></div>
+        </div>
+        
+        <div class="project"
+             data-search="2025 summer "
+             data-sort-year="2025"
+             data-sort-occasion="Summer">
+
+            <img src="images\Summer2025_1.jpg">
+
+            <div class="title">Summer (2025)</div>
+            <div class="title"></div>
+        </div>
+        
+        <div class="project"
+             data-search="2026 valentine's day "
+             data-sort-year="2026"
+             data-sort-occasion="Valentine's Day">
+
+            <img src="images\Valentines_2026.jpg">
+
+            <div class="title">Valentine's Day (2026)</div>
+            <div class="title"></div>
+        </div>
+        
+        </div>
+        <footer><p>Generated by Dad Project Creator</p></footer>
+    </body>
+    </html>
+    
